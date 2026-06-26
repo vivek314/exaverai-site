@@ -14,32 +14,32 @@
    `card-hero`, `bg-paper-2`, etc. Pairs with cp-design-preset.js (Tailwind).
    ============================================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap');
 
 :root {
   /* ── Font families ── */
   --font-sans:  'Inter', system-ui, -apple-system, sans-serif;
-  --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --font-serif: 'Fraunces', 'Source Serif 4', Georgia, 'Times New Roman', serif;
   --font-mono:  'JetBrains Mono', Consolas, 'Courier New', monospace;
 
-  /* ── Core Palette: Paper + Ink ── */
-  --paper-1: #FAF8F4;
-  --paper-2: #F4F1EA;
-  --paper-3: #EDE8DE;
-  --paper-4: #E4DDD0;
+  /* ── Core Palette: Paper + Ink (sharpened — brighter top, deeper edges) ── */
+  --paper-1: #FBFAF6;
+  --paper-2: #F2EEE5;
+  --paper-3: #E9E3D7;
+  --paper-4: #DAD2C4;
 
-  --ink-1: #1F1B16;
-  --ink-2: #3D3730;
-  --ink-3: #6B655C;
-  --ink-4: #9A938A;
-  --ink-5: #BFB8AD;
+  --ink-1: #171310;
+  --ink-2: #322C25;
+  --ink-3: #5C554B;
+  --ink-4: #928A7F;
+  --ink-5: #BCB4A8;
 
-  /* ── Accent Colors ── */
-  --sage: #8FA68A;
-  --sage-soft: #D9E0D4;
-  --clay: #B5836A;
+  /* ── Accent Colors (signature: deep petrol teal) ── */
+  --sage: #0E4A45;          /* primary accent — eyebrows, icons, focus, avatars */
+  --sage-soft: #D8E6E2;     /* soft petrol tint — icon chips / soft backgrounds */
+  --clay: #B5836A;          /* secondary warm spark — ✦ marquee, required marks */
   --clay-soft: #E8D7CB;
-  --ink-accent: #2C3742;
+  --ink-accent: #171310;    /* CTA — near-black warm ink, max contrast */
 
   /* ── Semantic Colors (muted) ── */
   --ok: #6B8E5A;    --ok-bg: #DCE5D2;
@@ -56,10 +56,10 @@
   --heat-5: #9C5E3D;
 
   /* ── Shadows (warm ink, never pure black) ── */
-  --shadow-1: 0 1px 2px rgba(31, 27, 22, 0.04);
-  --shadow-2: 0 2px 6px rgba(31, 27, 22, 0.06), 0 1px 2px rgba(31, 27, 22, 0.04);
-  --shadow-3: 0 4px 12px rgba(31, 27, 22, 0.08), 0 2px 4px rgba(31, 27, 22, 0.04);
-  --shadow-4: 0 8px 24px rgba(31, 27, 22, 0.10), 0 4px 8px rgba(31, 27, 22, 0.04);
+  --shadow-1: 0 1px 2px rgba(23, 19, 16, 0.05);
+  --shadow-2: 0 2px 8px rgba(23, 19, 16, 0.07), 0 1px 2px rgba(23, 19, 16, 0.05);
+  --shadow-3: 0 6px 20px rgba(23, 19, 16, 0.10), 0 2px 6px rgba(23, 19, 16, 0.05);
+  --shadow-4: 0 14px 40px rgba(23, 19, 16, 0.12), 0 6px 12px rgba(23, 19, 16, 0.05);
 
   /* ── Border Radius ── */
   --radius-sm: 4px;
