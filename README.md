@@ -72,3 +72,5 @@ built and served.
 cd exaverai
 npx vercel --prod
 ```
+
+<!-- deploy pipeline test: 2026-06-26T10:52:33Z -->
