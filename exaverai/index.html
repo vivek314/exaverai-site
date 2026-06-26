@@ -99,6 +99,10 @@
   .eyebrow::before{content:"";width:16px;height:1px;background:currentColor;opacity:.7}
 
   /* ---- HERO v2: asymmetric + live console ---- */
+  /* Own padding (compiled Tailwind purged pt-36/pb-28/sm:* — don't depend on them) */
+  .hero-v2{padding-top:8.5rem;padding-bottom:5.5rem}
+  @media(min-width:640px){.hero-v2{padding-top:10rem;padding-bottom:7rem}}
+  .hero-cta{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.9rem}
   .hero-grid{display:grid;grid-template-columns:1fr;gap:3rem;align-items:center}
   @media(min-width:1024px){.hero-grid{grid-template-columns:1.05fr .95fr;gap:4rem}}
   .hero-h1{font-family:var(--font-serif);font-weight:600;line-height:.96;letter-spacing:-.035em;color:var(--ink-1);font-size:clamp(2.9rem,7.5vw,5.4rem)}
@@ -107,20 +111,23 @@
   .hero-stat .n{font-family:var(--font-serif);font-size:2.1rem;font-weight:600;color:var(--ink-1);letter-spacing:-.02em;line-height:1}
   .hero-stat .l{margin-top:.35rem;font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
 
-  .console{background:#14110D;border:1px solid #2A251E;border-radius:18px;box-shadow:var(--shadow-4);overflow:hidden;font-family:var(--font-mono)}
-  .console-head{display:flex;align-items:center;gap:.6rem;padding:.7rem 1rem;border-bottom:1px solid #2A251E;background:#1B1712}
-  .console-dots{display:flex;gap:.4rem}.console-dots i{width:9px;height:9px;border-radius:50%;background:#3A332A;display:block}
-  .console-title{margin-left:.4rem;font-size:11px;color:#8A8276;letter-spacing:.05em}
-  .live-dot{margin-left:auto;display:inline-flex;align-items:center;gap:.45rem;font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:#5FBFA8}
-  .live-dot b{width:7px;height:7px;border-radius:50%;background:#34D399;animation:livePulse 1.8s infinite}
-  @keyframes livePulse{0%{box-shadow:0 0 0 0 rgba(52,211,153,.5)}70%{box-shadow:0 0 0 8px rgba(52,211,153,0)}100%{box-shadow:0 0 0 0 rgba(52,211,153,0)}}
-  .log{padding:1rem 1.1rem;min-height:228px;font-size:12.5px;line-height:1.95;color:#C9C2B6}
-  .log-line{display:flex;gap:.6rem;opacity:0;transform:translateY(4px);animation:logIn .45s forwards}
-  @keyframes logIn{to{opacity:1;transform:none}}
-  .log-time{color:#6E665A;white-space:nowrap}.log-ok{color:#34D399}
-  .pulse-bar{display:flex;align-items:flex-end;gap:3px;height:36px;padding:0 1.1rem 1.1rem}
-  .pulse-bar i{flex:1;background:linear-gradient(180deg,#34D399,var(--sage));border-radius:2px;animation:bars 1.5s ease-in-out infinite}
-  @keyframes bars{0%,100%{height:18%}50%{height:92%}}
+  .console{background:#14110D;border:1px solid #2A251E;border-radius:18px;box-shadow:var(--shadow-4);overflow:hidden;padding:1rem 1rem 1.15rem}
+  .mesh-head{display:flex;align-items:center;justify-content:space-between;padding:.35rem .5rem .55rem}
+  .mesh-title{font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#9A9286}
+  .mesh-legend{display:inline-flex;align-items:center;gap:.4rem;font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#5FBFA8}
+  .mesh-legend b{width:7px;height:7px;border-radius:50%;background:#34D399;animation:livePulse 1.8s infinite}
+  @keyframes livePulse{0%{box-shadow:0 0 0 0 rgba(52,211,153,.5)}70%{box-shadow:0 0 0 7px rgba(52,211,153,0)}100%{box-shadow:0 0 0 0 rgba(52,211,153,0)}}
+  .mesh{display:block;width:100%;height:auto}
+  .mesh .lbl{font-family:var(--font-mono);font-size:12px;fill:#A9CFC4;letter-spacing:.04em}
+  .mesh .hub-lbl{font-family:var(--font-mono);font-size:11px;fill:#EAF6F1;letter-spacing:.14em;font-weight:600}
+  .mesh .flow line{stroke-dasharray:1.5 10;animation:flow 1.1s linear infinite}
+  @keyframes flow{to{stroke-dashoffset:-23}}
+  .mesh .ring{animation:nodePulse 2.4s ease-out infinite}
+  @keyframes nodePulse{0%{r:20px;opacity:.55}70%{r:33px;opacity:0}100%{r:33px;opacity:0}}
+  .mesh .hub-ring{animation:hubPulse 2.4s ease-out infinite}
+  @keyframes hubPulse{0%{r:26px;opacity:.5}70%{r:44px;opacity:0}100%{r:44px;opacity:0}}
+  .mesh .tok{filter:drop-shadow(0 0 4px rgba(52,211,153,.8))}
+  .mesh-caption{text-align:center;font-family:var(--font-mono);font-size:10.5px;color:#7A7265;margin-top:.45rem;letter-spacing:.03em}
 
   /* ---- BENTO services ---- */
   .bento{display:grid;grid-template-columns:1fr;gap:1rem}
@@ -147,7 +154,7 @@
   .btn-on-dark{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.9rem;background:#FBFAF6;color:#14110D;font-weight:600;font-size:.9rem;padding:.9rem 1.7rem;border-radius:999px;transition:transform .2s,box-shadow .2s}
   .btn-on-dark:hover{transform:translateY(-2px);box-shadow:0 12px 34px rgba(0,0,0,.45)}
 
-  @media(prefers-reduced-motion:reduce){.live-dot b,.pulse-bar i,.log-line{animation:none!important;opacity:1!important;transform:none!important}}
+  @media(prefers-reduced-motion:reduce){.mesh .flow line,.mesh .ring,.mesh .hub-ring,.mesh-legend b{animation:none!important}}
 </style>
 </head>
 <body class="font-sans">
@@ -186,14 +193,14 @@
 </header>
 
 <!-- HERO -->
-<section id="home" class="relative overflow-hidden pt-32 pb-20 sm:pt-36 sm:pb-28">
+<section id="home" class="hero-v2 relative overflow-hidden">
   <div class="mx-auto w-full max-w-7xl px-5 sm:px-8">
     <div class="hero-grid">
       <div class="hero-copy reveal">
         <span class="eyebrow">Exaver AI · Automation systems</span>
         <h1 class="hero-h1 mt-6">Build it once.<br /><em>Let it run.</em></h1>
         <p class="mt-7 max-w-md text-base text-cp-ink-3 sm:text-lg">Custom AI systems — autonomous agents, workflow automations, and voice agents — built once, owned by you, running round the clock.</p>
-        <div class="mt-8 flex flex-col items-start gap-3 sm:flex-row">
+        <div class="hero-cta">
           <a href="#contact" data-calendly class="group inline-flex items-center gap-2 rounded-full bg-cp-ink-accent px-7 py-3.5 text-sm font-medium text-cp-paper-1 shadow-cp-1 transition-all hover:shadow-cp-2">Book a call
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </a>
@@ -206,16 +213,59 @@
         </div>
       </div>
       <div class="reveal" style="transition-delay:120ms">
-        <div class="console" aria-hidden="true">
-          <div class="console-head">
-            <span class="console-dots"><i></i><i></i><i></i></span>
-            <span class="console-title">exaver-system · production</span>
-            <span class="live-dot"><b></b>running</span>
+        <div class="console">
+          <div class="mesh-head">
+            <span class="mesh-title">Agents at work</span>
+            <span class="mesh-legend"><b></b> orchestrating</span>
           </div>
-          <div class="log" id="liveLog"></div>
-          <div class="pulse-bar">
-            <i style="animation-delay:0s"></i><i style="animation-delay:.08s"></i><i style="animation-delay:.16s"></i><i style="animation-delay:.24s"></i><i style="animation-delay:.32s"></i><i style="animation-delay:.4s"></i><i style="animation-delay:.48s"></i><i style="animation-delay:.56s"></i><i style="animation-delay:.64s"></i><i style="animation-delay:.72s"></i><i style="animation-delay:.8s"></i><i style="animation-delay:.88s"></i><i style="animation-delay:.96s"></i><i style="animation-delay:1.04s"></i><i style="animation-delay:1.12s"></i><i style="animation-delay:1.2s"></i>
-          </div>
+          <svg class="mesh" viewBox="0 0 460 300" role="img" aria-label="Exaver AI agents collaborating around a central hub to handle work">
+            <g class="links" fill="none" stroke="#2C6157" stroke-width="1.5" stroke-linecap="round">
+              <line x1="230" y1="150" x2="95" y2="64"/><line x1="230" y1="150" x2="365" y2="64"/><line x1="230" y1="150" x2="95" y2="236"/><line x1="230" y1="150" x2="365" y2="236"/>
+            </g>
+            <g class="flow" fill="none" stroke="#34D399" stroke-width="1.6" stroke-linecap="round">
+              <line x1="230" y1="150" x2="95" y2="64"/><line x1="230" y1="150" x2="365" y2="64"/><line x1="230" y1="150" x2="95" y2="236"/><line x1="230" y1="150" x2="365" y2="236"/>
+            </g>
+            <!-- Agent -->
+            <g class="node">
+              <circle class="ring" cx="95" cy="64" r="20" fill="none" stroke="#34D399" style="animation-delay:0s"/>
+              <circle cx="95" cy="64" r="20" fill="#1B2620" stroke="#3A7A6E" stroke-width="1.5"/>
+              <g transform="translate(95,64)"><g transform="translate(-9,-9) scale(.78)" fill="none" stroke="#7FE0C8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/></g></g>
+              <text class="lbl" x="95" y="101" text-anchor="middle">Agent</text>
+            </g>
+            <!-- Workflow -->
+            <g class="node">
+              <circle class="ring" cx="365" cy="64" r="20" fill="none" stroke="#34D399" style="animation-delay:.6s"/>
+              <circle cx="365" cy="64" r="20" fill="#1B2620" stroke="#3A7A6E" stroke-width="1.5"/>
+              <g transform="translate(365,64)"><g transform="translate(-9,-9) scale(.78)" fill="none" stroke="#7FE0C8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="6" height="6" rx="1"/><rect x="15" y="15" width="6" height="6" rx="1"/><path d="M9 6h6a3 3 0 0 1 3 3v6"/></g></g>
+              <text class="lbl" x="365" y="101" text-anchor="middle">Workflow</text>
+            </g>
+            <!-- Voice -->
+            <g class="node">
+              <circle class="ring" cx="95" cy="236" r="20" fill="none" stroke="#34D399" style="animation-delay:1.2s"/>
+              <circle cx="95" cy="236" r="20" fill="#1B2620" stroke="#3A7A6E" stroke-width="1.5"/>
+              <g transform="translate(95,236)"><g transform="translate(-9,-9) scale(.78)" fill="none" stroke="#7FE0C8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="11" rx="3"/><path d="M5 10a7 7 0 0 0 14 0"/><line x1="12" y1="19" x2="12" y2="22"/></g></g>
+              <text class="lbl" x="95" y="273" text-anchor="middle">Voice</text>
+            </g>
+            <!-- Social -->
+            <g class="node">
+              <circle class="ring" cx="365" cy="236" r="20" fill="none" stroke="#34D399" style="animation-delay:1.8s"/>
+              <circle cx="365" cy="236" r="20" fill="#1B2620" stroke="#3A7A6E" stroke-width="1.5"/>
+              <g transform="translate(365,236)"><g transform="translate(-9,-9) scale(.78)" fill="none" stroke="#7FE0C8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></g></g>
+              <text class="lbl" x="365" y="273" text-anchor="middle">Social</text>
+            </g>
+            <!-- Hub -->
+            <g class="hub">
+              <circle class="hub-ring" cx="230" cy="150" r="26" fill="none" stroke="#34D399"/>
+              <circle cx="230" cy="150" r="26" fill="#16201C" stroke="#34D399" stroke-width="1.5"/>
+              <text class="hub-lbl" x="230" y="154" text-anchor="middle">EXAVER</text>
+            </g>
+            <!-- Tokens shuttling hub -> agent -> hub -->
+            <circle class="tok" r="4.5" fill="#34D399"><animateMotion dur="2.4s" begin="0s"   repeatCount="indefinite" path="M230,150 L95,64 L230,150"/></circle>
+            <circle class="tok" r="4.5" fill="#34D399"><animateMotion dur="2.4s" begin="0.6s" repeatCount="indefinite" path="M230,150 L365,64 L230,150"/></circle>
+            <circle class="tok" r="4.5" fill="#34D399"><animateMotion dur="2.4s" begin="1.2s" repeatCount="indefinite" path="M230,150 L95,236 L230,150"/></circle>
+            <circle class="tok" r="4.5" fill="#34D399"><animateMotion dur="2.4s" begin="1.8s" repeatCount="indefinite" path="M230,150 L365,236 L230,150"/></circle>
+          </svg>
+          <div class="mesh-caption">One brief in. Agents read, decide, act — round the clock.</div>
         </div>
       </div>
     </div>
@@ -471,34 +521,11 @@
     });
   });
 
-  // ---- Live system console (hero signature) ----
-  (function(){
-    const el = document.getElementById('liveLog');
-    if(!el) return;
-    const evs = [
-      'agent ▸ new invoice detected',
-      'extract ▸ vendor · amount · GSTIN',
-      'workflow ▸ reconcile GSTR-2B',
-      'voice ▸ outbound call queued',
-      'voice ▸ lead qualified',
-      'report ▸ weekly summary sent',
-      'agent ▸ invoice paid · logged',
-      'social ▸ 3 replies posted',
-      'workflow ▸ client onboarded',
-    ];
-    let i = 0, h = 9, m = 41, s = 2;
-    const stamp = () => { s += 7 + Math.floor(i*3 % 11); if(s>=60){s-=60;m++;} if(m>=60){m-=60;h++;} return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`; };
-    function push(){
-      const line = document.createElement('div');
-      line.className = 'log-line';
-      line.innerHTML = `<span class="log-time">${stamp()}</span><span>${evs[i%evs.length]} <span class="log-ok">✓</span></span>`;
-      el.appendChild(line);
-      while(el.children.length > 7) el.removeChild(el.firstChild);
-      i++;
-    }
-    for(let k=0;k<7;k++) push();
-    if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches) setInterval(push, 1700);
-  })();
+  // ---- Hero agent-mesh: pause SMIL motion if the visitor prefers reduced motion ----
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const m = document.querySelector('.mesh');
+    if (m && m.pauseAnimations) m.pauseAnimations();
+  }
 
   // ---- Data ----
   const services = [
