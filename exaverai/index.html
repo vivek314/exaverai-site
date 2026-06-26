@@ -84,6 +84,70 @@
   }
   .reveal { opacity:0; transform:translateY(24px); transition:opacity .6s cubic-bezier(.21,.47,.32,.98), transform .6s cubic-bezier(.21,.47,.32,.98); }
   .reveal.in { opacity:1; transform:none; }
+
+  /* ============================================================
+     MODERN v2 LAYER — live console, bento, dark bands, grain
+     All colors via tokens → revertible. Sits in inline <style>.
+     ============================================================ */
+  /* Tactile paper grain (very low opacity) */
+  body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.55;mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");}
+  body>*{position:relative;z-index:2}
+
+  /* Mono "systems" eyebrow */
+  .eyebrow{display:inline-flex;align-items:center;gap:.55rem;font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--sage)}
+  .eyebrow::before{content:"";width:16px;height:1px;background:currentColor;opacity:.7}
+
+  /* ---- HERO v2: asymmetric + live console ---- */
+  .hero-grid{display:grid;grid-template-columns:1fr;gap:3rem;align-items:center}
+  @media(min-width:1024px){.hero-grid{grid-template-columns:1.05fr .95fr;gap:4rem}}
+  .hero-h1{font-family:var(--font-serif);font-weight:600;line-height:.96;letter-spacing:-.035em;color:var(--ink-1);font-size:clamp(2.9rem,7.5vw,5.4rem)}
+  .hero-h1 em{font-style:italic;color:var(--sage)}
+  .hero-stats{display:flex;gap:2.4rem;flex-wrap:wrap}
+  .hero-stat .n{font-family:var(--font-serif);font-size:2.1rem;font-weight:600;color:var(--ink-1);letter-spacing:-.02em;line-height:1}
+  .hero-stat .l{margin-top:.35rem;font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+
+  .console{background:#14110D;border:1px solid #2A251E;border-radius:18px;box-shadow:var(--shadow-4);overflow:hidden;font-family:var(--font-mono)}
+  .console-head{display:flex;align-items:center;gap:.6rem;padding:.7rem 1rem;border-bottom:1px solid #2A251E;background:#1B1712}
+  .console-dots{display:flex;gap:.4rem}.console-dots i{width:9px;height:9px;border-radius:50%;background:#3A332A;display:block}
+  .console-title{margin-left:.4rem;font-size:11px;color:#8A8276;letter-spacing:.05em}
+  .live-dot{margin-left:auto;display:inline-flex;align-items:center;gap:.45rem;font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:#5FBFA8}
+  .live-dot b{width:7px;height:7px;border-radius:50%;background:#34D399;animation:livePulse 1.8s infinite}
+  @keyframes livePulse{0%{box-shadow:0 0 0 0 rgba(52,211,153,.5)}70%{box-shadow:0 0 0 8px rgba(52,211,153,0)}100%{box-shadow:0 0 0 0 rgba(52,211,153,0)}}
+  .log{padding:1rem 1.1rem;min-height:228px;font-size:12.5px;line-height:1.95;color:#C9C2B6}
+  .log-line{display:flex;gap:.6rem;opacity:0;transform:translateY(4px);animation:logIn .45s forwards}
+  @keyframes logIn{to{opacity:1;transform:none}}
+  .log-time{color:#6E665A;white-space:nowrap}.log-ok{color:#34D399}
+  .pulse-bar{display:flex;align-items:flex-end;gap:3px;height:36px;padding:0 1.1rem 1.1rem}
+  .pulse-bar i{flex:1;background:linear-gradient(180deg,#34D399,var(--sage));border-radius:2px;animation:bars 1.5s ease-in-out infinite}
+  @keyframes bars{0%,100%{height:18%}50%{height:92%}}
+
+  /* ---- BENTO services ---- */
+  .bento{display:grid;grid-template-columns:1fr;gap:1rem}
+  @media(min-width:768px){.bento{grid-template-columns:repeat(12,1fr)}
+    .bento>*:nth-child(1){grid-column:span 7}.bento>*:nth-child(2){grid-column:span 5}
+    .bento>*:nth-child(3){grid-column:span 5}.bento>*:nth-child(4){grid-column:span 7}}
+  .tile{position:relative;display:flex;flex-direction:column;background:var(--paper-2);border:1px solid var(--paper-4);border-radius:18px;padding:1.7rem;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
+  .tile:hover{transform:translateY(-4px);box-shadow:var(--shadow-3);border-color:var(--sage)}
+  .tile-ic{display:grid;place-items:center;width:46px;height:46px;border-radius:13px;background:var(--sage-soft);color:var(--sage);margin-bottom:1.1rem}
+  .tile h3{font-size:1.18rem;font-weight:600;color:var(--ink-1);letter-spacing:-.01em}
+  .tile p{margin-top:.55rem;font-size:.9rem;line-height:1.62;color:var(--ink-3)}
+  .tile .arrow{position:absolute;top:1.7rem;right:1.7rem;color:var(--ink-4);transition:transform .25s,color .25s}
+  .tile:hover .arrow{transform:translate(3px,-3px);color:var(--sage)}
+
+  /* ---- DARK console band ---- */
+  .band-dark{position:relative;background:#14110D;border-radius:28px;overflow:hidden;padding:4.5rem 2rem;text-align:center;isolation:isolate}
+  .band-dark::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(60% 85% at 50% 0%,rgba(14,74,69,.6),transparent 70%)}
+  .band-dark::after{content:"";position:absolute;inset:0;z-index:-1;opacity:.5;
+    background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:42px 42px;
+    -webkit-mask-image:radial-gradient(72% 72% at 50% 28%,#000,transparent);mask-image:radial-gradient(72% 72% at 50% 28%,#000,transparent)}
+  .band-dark h2{font-family:var(--font-serif);color:#FBFAF6;font-weight:600;letter-spacing:-.02em;font-size:clamp(1.9rem,4vw,2.9rem);line-height:1.05}
+  .band-dark p{color:#B8B0A4;max-width:34rem;margin:1.1rem auto 0;font-size:1rem;line-height:1.6}
+  .band-dark .eyebrow{color:#5FBFA8;justify-content:center}
+  .btn-on-dark{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.9rem;background:#FBFAF6;color:#14110D;font-weight:600;font-size:.9rem;padding:.9rem 1.7rem;border-radius:999px;transition:transform .2s,box-shadow .2s}
+  .btn-on-dark:hover{transform:translateY(-2px);box-shadow:0 12px 34px rgba(0,0,0,.45)}
+
+  @media(prefers-reduced-motion:reduce){.live-dot b,.pulse-bar i,.log-line{animation:none!important;opacity:1!important;transform:none!important}}
 </style>
 </head>
 <body class="font-sans">
@@ -122,46 +186,75 @@
 </header>
 
 <!-- HERO -->
-<section id="home" class="relative flex min-h-screen items-center overflow-hidden pt-28">
-  <div class="relative z-10 mx-auto flex w-full max-w-7xl flex-col items-center px-5 text-center sm:px-8">
-    <span class="mb-6 inline-flex items-center gap-2 rounded-full border border-cp-paper-4 bg-cp-paper-2 px-4 py-1.5 text-xs font-medium uppercase tracking-widest text-cp-sage">Exaver AI</span>
-    <h1 class="font-cp-serif max-w-4xl text-5xl font-semibold leading-[1.05] tracking-tight text-cp-ink-1 sm:text-6xl lg:text-7xl">Transform Your Business<br />with AI Automation</h1>
-    <p class="mt-6 max-w-xl text-base text-cp-ink-3 sm:text-lg">Custom AI systems for businesses ready to cut costs, streamline ops, and scale fast.</p>
-    <div class="mt-9 flex flex-col items-center gap-3 sm:flex-row">
-      <a href="#services" class="group inline-flex items-center gap-2 rounded-full bg-cp-ink-accent px-7 py-3.5 text-sm font-medium text-cp-paper-1 shadow-cp-1 transition-all hover:bg-cp-ink-1 hover:shadow-cp-2">Explore Systems
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </a>
-      <a href="#contact" data-calendly class="inline-flex items-center gap-2 rounded-full border border-cp-paper-4 bg-cp-paper-1 px-7 py-3.5 text-sm font-medium text-cp-ink-1 transition-colors hover:bg-cp-paper-2">Book a Call</a>
-    </div>
-    <div class="mt-20 grid w-full max-w-3xl grid-cols-1 gap-6 sm:grid-cols-3">
-      <div class="rounded-2xl border border-cp-paper-4 bg-cp-paper-2 px-6 py-7 shadow-cp-1">
-        <div class="font-cp-serif text-4xl font-bold text-cp-ink-1 sm:text-5xl"><span class="count" data-value="40">0</span>+</div>
-        <div class="mt-2 text-xs font-medium uppercase tracking-widest text-cp-ink-3">AI Systems Deployed</div>
+<section id="home" class="relative overflow-hidden pt-32 pb-20 sm:pt-36 sm:pb-28">
+  <div class="mx-auto w-full max-w-7xl px-5 sm:px-8">
+    <div class="hero-grid">
+      <div class="hero-copy reveal">
+        <span class="eyebrow">Exaver AI · Automation systems</span>
+        <h1 class="hero-h1 mt-6">Build it once.<br /><em>Let it run.</em></h1>
+        <p class="mt-7 max-w-md text-base text-cp-ink-3 sm:text-lg">Custom AI systems — autonomous agents, workflow automations, and voice agents — built once, owned by you, running round the clock.</p>
+        <div class="mt-8 flex flex-col items-start gap-3 sm:flex-row">
+          <a href="#contact" data-calendly class="group inline-flex items-center gap-2 rounded-full bg-cp-ink-accent px-7 py-3.5 text-sm font-medium text-cp-paper-1 shadow-cp-1 transition-all hover:shadow-cp-2">Book a call
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <a href="#services" class="inline-flex items-center gap-2 rounded-full border border-cp-paper-4 bg-cp-paper-1 px-7 py-3.5 text-sm font-medium text-cp-ink-1 transition-colors hover:bg-cp-paper-2">Explore systems</a>
+        </div>
+        <div class="hero-stats mt-12">
+          <div class="hero-stat"><div class="n"><span class="count" data-value="40">0</span>+</div><div class="l">Systems deployed</div></div>
+          <div class="hero-stat"><div class="n"><span class="count" data-value="7">0</span>&#215;</div><div class="l">Avg. ROI / project</div></div>
+          <div class="hero-stat"><div class="n"><span class="count" data-value="12">0</span>+</div><div class="l">Verticals</div></div>
+        </div>
       </div>
-      <div class="rounded-2xl border border-cp-paper-4 bg-cp-paper-2 px-6 py-7 shadow-cp-1">
-        <div class="font-cp-serif text-4xl font-bold text-cp-ink-1 sm:text-5xl"><span class="count" data-value="7">0</span>X</div>
-        <div class="mt-2 text-xs font-medium uppercase tracking-widest text-cp-ink-3">Avg. ROI Per Project</div>
-      </div>
-      <div class="rounded-2xl border border-cp-paper-4 bg-cp-paper-2 px-6 py-7 shadow-cp-1">
-        <div class="font-cp-serif text-4xl font-bold text-cp-ink-1 sm:text-5xl"><span class="count" data-value="12">0</span>+</div>
-        <div class="mt-2 text-xs font-medium uppercase tracking-widest text-cp-ink-3">Verticals Transformed</div>
+      <div class="reveal" style="transition-delay:120ms">
+        <div class="console" aria-hidden="true">
+          <div class="console-head">
+            <span class="console-dots"><i></i><i></i><i></i></span>
+            <span class="console-title">exaver-system · production</span>
+            <span class="live-dot"><b></b>running</span>
+          </div>
+          <div class="log" id="liveLog"></div>
+          <div class="pulse-bar">
+            <i style="animation-delay:0s"></i><i style="animation-delay:.08s"></i><i style="animation-delay:.16s"></i><i style="animation-delay:.24s"></i><i style="animation-delay:.32s"></i><i style="animation-delay:.4s"></i><i style="animation-delay:.48s"></i><i style="animation-delay:.56s"></i><i style="animation-delay:.64s"></i><i style="animation-delay:.72s"></i><i style="animation-delay:.8s"></i><i style="animation-delay:.88s"></i><i style="animation-delay:.96s"></i><i style="animation-delay:1.04s"></i><i style="animation-delay:1.12s"></i><i style="animation-delay:1.2s"></i>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- SERVICES -->
+<!-- SERVICES (bento) -->
 <section id="services" class="relative py-24 sm:py-32">
   <div class="mx-auto w-full max-w-7xl px-5 sm:px-8">
     <div class="reveal mx-auto max-w-2xl text-center">
-      <h2 class="font-cp-serif text-3xl font-bold tracking-tight text-cp-ink-1 sm:text-4xl lg:text-5xl">AI Systems Built for Impact</h2>
-      <p class="mt-5 text-base text-cp-ink-3">Built for teams ready to move fast, cut waste, and win bigger with AI. Get fully-built, battle-tested AI systems—done right, delivered fast.</p>
+      <span class="eyebrow">What we build</span>
+      <h2 class="font-cp-serif mt-4 text-3xl font-bold tracking-tight text-cp-ink-1 sm:text-4xl lg:text-5xl">AI systems built for impact</h2>
+      <p class="mt-5 text-base text-cp-ink-3">Fully-built, battle-tested systems—done right, delivered fast, owned by you.</p>
     </div>
-  </div>
-  <div class="marquee-mask mt-16 w-full overflow-hidden">
-    <div class="animate-marquee-left pause-on-hover flex w-max" style="--d:45s">
-      <div class="flex shrink-0" data-services></div>
-      <div class="flex shrink-0" data-services aria-hidden="true"></div>
+    <div class="bento reveal mt-14">
+      <article class="tile">
+        <span class="arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+        <span class="tile-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/><line x1="8" y1="16" x2="8" y2="16"/><line x1="16" y1="16" x2="16" y2="16"/></svg></span>
+        <h3>Autonomous AI Agents</h3>
+        <p>The agentic era has begun. These systems don't just automate—they act. One entry point, one instruction, then wait. Results show up. No micromanaging. They work round the clock—so you don't have to.</p>
+      </article>
+      <article class="tile">
+        <span class="arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+        <span class="tile-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="6" height="6" rx="1"/><rect x="15" y="15" width="6" height="6" rx="1"/><path d="M9 6h6a3 3 0 0 1 3 3v6"/></svg></span>
+        <h3>Workflow Automations</h3>
+        <p>No inputs needed. They run on their own—daily, weekly, or on triggers. From analysing data and generating reports to sending invoices or onboarding clients—done before Monday.</p>
+      </article>
+      <article class="tile">
+        <span class="arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+        <span class="tile-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+        <h3>AI Voice Agents</h3>
+        <p>Inbound or outbound—voice agents talk to your leads and customers in real time. They answer, qualify, remind, and follow up—so you don't have to.</p>
+      </article>
+      <article class="tile">
+        <span class="arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+        <span class="tile-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></span>
+        <h3>Social Media AI Systems</h3>
+        <p>AI handles your content, comments, and conversations. It writes, schedules, replies, and even reaches out. Your system works the platform while you run the business.</p>
+      </article>
     </div>
   </div>
 </section>
@@ -178,13 +271,14 @@
   <p>AI handles your content, comments, and conversations. It writes, schedules, replies, and even reaches out. Your AI system works the platform while you run the business.</p>
 </noscript>
 
-<!-- SHIFT CTA -->
-<section class="relative py-24">
-  <div class="mx-auto w-full max-w-7xl px-5 sm:px-8">
-    <div class="reveal relative mx-auto max-w-4xl overflow-hidden rounded-[2.5rem] border border-cp-paper-4 bg-cp-paper-2 px-6 py-16 text-center shadow-cp-2 sm:px-12 sm:py-20">
-      <h2 class="font-cp-serif mx-auto max-w-2xl text-3xl font-bold tracking-tight text-cp-ink-1 sm:text-4xl">The Shift to AI Is Happening. Are You In?</h2>
-      <p class="mx-auto mt-5 max-w-xl text-base text-cp-ink-3">Our team of AI experts will analyze your business needs and design a customized AI adoption strategy to maximize your ROI — or we tailor around your vision and build fast.</p>
-      <a href="#contact" data-calendly class="group mt-9 inline-flex items-center gap-2 rounded-full bg-cp-ink-accent px-7 py-3.5 text-sm font-medium text-cp-paper-1 shadow-cp-1 transition-all hover:bg-cp-ink-1 hover:shadow-cp-2">Schedule a Strategy Call
+<!-- SHIFT CTA — dark console band -->
+<section class="relative py-16 sm:py-24">
+  <div class="mx-auto w-full max-w-5xl px-5 sm:px-8">
+    <div class="band-dark reveal">
+      <span class="eyebrow">The shift is here</span>
+      <h2 class="mt-5">The shift to AI is happening.<br />Are you in?</h2>
+      <p>We map where AI moves the needle in your business, build the system, and hand it over running—no jargon, no open-ended retainer.</p>
+      <a href="#contact" data-calendly class="btn-on-dark group">Schedule a strategy call
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
     </div>
@@ -376,6 +470,35 @@
       }
     });
   });
+
+  // ---- Live system console (hero signature) ----
+  (function(){
+    const el = document.getElementById('liveLog');
+    if(!el) return;
+    const evs = [
+      'agent ▸ new invoice detected',
+      'extract ▸ vendor · amount · GSTIN',
+      'workflow ▸ reconcile GSTR-2B',
+      'voice ▸ outbound call queued',
+      'voice ▸ lead qualified',
+      'report ▸ weekly summary sent',
+      'agent ▸ invoice paid · logged',
+      'social ▸ 3 replies posted',
+      'workflow ▸ client onboarded',
+    ];
+    let i = 0, h = 9, m = 41, s = 2;
+    const stamp = () => { s += 7 + Math.floor(i*3 % 11); if(s>=60){s-=60;m++;} if(m>=60){m-=60;h++;} return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`; };
+    function push(){
+      const line = document.createElement('div');
+      line.className = 'log-line';
+      line.innerHTML = `<span class="log-time">${stamp()}</span><span>${evs[i%evs.length]} <span class="log-ok">✓</span></span>`;
+      el.appendChild(line);
+      while(el.children.length > 7) el.removeChild(el.firstChild);
+      i++;
+    }
+    for(let k=0;k<7;k++) push();
+    if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches) setInterval(push, 1700);
+  })();
 
   // ---- Data ----
   const services = [
