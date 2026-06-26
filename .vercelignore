@@ -1,0 +1,18 @@
+# Exclude the legacy Next.js app + tooling so Vercel deploys ONLY the static site.
+node_modules
+.next
+app
+components
+lib
+package.json
+package-lock.json
+next.config.mjs
+next-env.d.ts
+tsconfig.json
+tailwind.config.ts
+postcss.config.mjs
+tailwind.static.config.js
+tw-input.css
+automate-flow.html
+SEO-TASK.md
+.env.example
