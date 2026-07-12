@@ -36,30 +36,60 @@
   // Browsers don't re-fire :hover during a scroll (cursor is still, page moves), so the
   // row under the pointer wouldn't light up on fast scroll. We track the pointer and, on
   // scroll, resolve the row actually under it. Mouse movement falls back to native :hover.
-  (function () {
-    var index = document.querySelector(".index");
-    if (!index) return;
-    var px = -1, py = -1, current = null, ticking = false;
-    var set = function (row) {
-      if (current === row) return;
-      if (current) current.classList.remove("cursor-hover");
-      current = row;
-      if (current) current.classList.add("cursor-hover");
-    };
-    window.addEventListener("pointermove", function (e) {
-      px = e.clientX; py = e.clientY;
-      set(null); // let native :hover take over while the mouse is moving
-    }, { passive: true });
-    window.addEventListener("scroll", function () {
-      if (ticking || px < 0) return;
-      ticking = true;
-      requestAnimationFrame(function () {
-        ticking = false;
-        var el = document.elementFromPoint(px, py);
-        set(el && el.closest ? el.closest(".index .row") : null);
+  var hoverDevice = window.matchMedia && window.matchMedia("(hover: hover)").matches;
+  if (hoverDevice) {
+    (function () {
+      var index = document.querySelector(".index");
+      if (!index) return;
+      var px = -1, py = -1, current = null, ticking = false;
+      var set = function (row) {
+        if (current === row) return;
+        if (current) current.classList.remove("cursor-hover");
+        current = row;
+        if (current) current.classList.add("cursor-hover");
+      };
+      window.addEventListener("pointermove", function (e) {
+        px = e.clientX; py = e.clientY;
+        set(null); // let native :hover take over while the mouse is moving
+      }, { passive: true });
+      window.addEventListener("scroll", function () {
+        if (ticking || px < 0) return;
+        ticking = true;
+        requestAnimationFrame(function () {
+          ticking = false;
+          var el = document.elementFromPoint(px, py);
+          set(el && el.closest ? el.closest(".index .row") : null);
+        });
+      }, { passive: true });
+    })();
+  }
+
+  // ---- Touch devices (no hover): auto-highlight the row / step nearest the screen centre ----
+  if (!hoverDevice) {
+    var autoGroups = [
+      [].slice.call(document.querySelectorAll(".index .row")),
+      [].slice.call(document.querySelectorAll(".steps .step"))
+    ];
+    var autoTick = false;
+    var syncAuto = function () {
+      autoTick = false;
+      var mid = window.innerHeight / 2;
+      autoGroups.forEach(function (list) {
+        var best = null, bestD = Infinity;
+        list.forEach(function (el) {
+          var r = el.getBoundingClientRect();
+          if (r.bottom < 0 || r.top > window.innerHeight) return;
+          var d = Math.abs((r.top + r.bottom) / 2 - mid);
+          if (d < bestD) { bestD = d; best = el; }
+        });
+        list.forEach(function (el) { el.classList.toggle("auto", el === best); });
       });
+    };
+    window.addEventListener("scroll", function () {
+      if (!autoTick) { autoTick = true; requestAnimationFrame(syncAuto); }
     }, { passive: true });
-  })();
+    syncAuto();
+  }
 
   // ---- Nav CTA becomes the primary once the hero CTA scrolls out of view ----
   var heroCta = document.querySelector(".hero-side .stamp");

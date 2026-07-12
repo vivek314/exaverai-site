@@ -130,17 +130,26 @@ a{color:inherit;text-decoration:none}
 .row-no{font-family:var(--mono);font-size:.9rem;color:var(--oxblood);padding-top:8px}
 .row-name{font-family:var(--disp);font-weight:400;font-size:clamp(1.5rem,3.4vw,2.6rem);line-height:.94;margin:0;letter-spacing:-.01em}
 .row-desc{font-size:1.08rem;color:var(--ink-2);max-width:46ch;align-self:center}
-.row:hover,.row.cursor-hover{background:var(--vermilion);color:var(--bone);padding-left:clamp(10px,2vw,24px);
-  transition:none}
-.row:hover .row-no,.row.cursor-hover .row-no{color:var(--bone)}
-.row:hover .row-desc,.row.cursor-hover .row-desc{color:var(--bone)}
+/* JS-driven highlight: desktop cursor-sync (.cursor-hover) + touch scroll auto (.auto) */
+.row.cursor-hover,.row.auto{background:var(--vermilion);color:var(--bone);padding-left:clamp(10px,2vw,24px);transition:none}
+.row.cursor-hover .row-no,.row.auto .row-no{color:var(--bone)}
+.row.cursor-hover .row-desc,.row.auto .row-desc{color:var(--bone)}
+/* mouse hover only on pointer devices (prevents a tap sticking orange on phones) */
+@media (hover:hover){
+  .row:hover{background:var(--vermilion);color:var(--bone);padding-left:clamp(10px,2vw,24px);transition:none}
+  .row:hover .row-no{color:var(--bone)}
+  .row:hover .row-desc{color:var(--bone)}
+}
 .hb{display:none}
 
 /* ---------- process steps ---------- */
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2vw,22px)}
 .step{padding:clamp(26px,3vw,34px);border:2px solid rgba(244,227,199,.22);background:rgba(244,227,199,.03);
   transition:transform .28s cubic-bezier(.21,.5,.28,1),box-shadow .28s ease,border-color .28s ease}
-.steps .step:hover{transform:translateY(-10px);box-shadow:9px 12px 0 var(--vermilion);border-color:var(--bone)}
+.steps .step.auto{transform:translateY(-10px);box-shadow:9px 12px 0 var(--vermilion);border-color:var(--bone)}
+@media (hover:hover){
+  .steps .step:hover{transform:translateY(-10px);box-shadow:9px 12px 0 var(--vermilion);border-color:var(--bone)}
+}
 .step-no{font-family:var(--mono);font-size:.9rem;color:var(--orange)}
 .step h3{font-family:var(--disp);font-weight:400;font-size:1.5rem;margin:16px 0 12px;letter-spacing:-.01em}
 .step p{color:#C9B79A;font-size:1.05rem;margin:0}
