@@ -98,24 +98,33 @@
   }, { threshold: 0.2 });
   document.querySelectorAll(".drop-rev").forEach(function (el) { dropIO.observe(el); });
 
-  // ---- Contact form ----
+  // ---- Contact form (submits to Formspree in the background, keeps the success UI) ----
+  var FORMSPREE_ENDPOINT = "https://formspree.io/f/xzdnpalr";
   var form = document.getElementById("contactForm");
   if (form) {
     form.addEventListener("submit", function (e) {
       e.preventDefault();
-      var f = new FormData(form);
-      var company = f.get("company");
-      var subject = encodeURIComponent("New inquiry from " + f.get("name") + (company ? " (" + company + ")" : ""));
-      var body = [
-        "Name: " + f.get("name"),
-        "Email: " + f.get("email"),
-        company ? "Company: " + company : "",
-        "",
-        f.get("message")
-      ].filter(Boolean).join("%0D%0A");
-      window.location.href = "mailto:contact@exaverai.com?subject=" + subject + "&body=" + body;
-      form.setAttribute("hidden", "");
-      document.getElementById("formSuccess").removeAttribute("hidden");
+      var btn = form.querySelector('button[type="submit"]');
+      var label = btn ? btn.innerHTML : "";
+      if (btn) { btn.disabled = true; btn.textContent = "Sending…"; }
+      var fd = new FormData(form);
+      var company = fd.get("company");
+      fd.append("_subject", "New inquiry from " + (fd.get("name") || "") + (company ? " (" + company + ")" : ""));
+      fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        body: fd,
+        headers: { "Accept": "application/json" }
+      }).then(function (res) {
+        if (res.ok) {
+          form.setAttribute("hidden", "");
+          document.getElementById("formSuccess").removeAttribute("hidden");
+        } else {
+          throw new Error("bad response");
+        }
+      }).catch(function () {
+        if (btn) { btn.disabled = false; btn.innerHTML = label; }
+        window.location.href = "mailto:contact@exaverai.com"; // fallback if the network call fails
+      });
     });
   }
 
