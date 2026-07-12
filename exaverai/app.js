@@ -2,14 +2,40 @@
 (function () {
   "use strict";
 
+  // ---- Analytics: fire custom Vercel Web Analytics events ----
+  var track = function (name, data) {
+    try { if (window.va) window.va("event", data ? { name: name, data: data } : { name: name }); } catch (e) {}
+  };
+  var evLoc = function (el) {
+    if (!el || !el.closest) return "other";
+    if (el.closest(".bar")) return "nav";
+    if (el.closest(".mobile-menu")) return "menu";
+    if (el.closest(".hero")) return "hero";
+    if (el.closest(".contact")) return "contact";
+    if (el.closest(".foot")) return "footer";
+    return "other";
+  };
+
   // ---- Calendly ----
   var CALENDLY_URL = "https://calendly.com/contact-exaverai/30min";
   document.querySelectorAll("[data-calendly]").forEach(function (el) {
     el.addEventListener("click", function (e) {
       e.preventDefault();
+      track("book_call", { location: evLoc(el) });
       if (window.Calendly && window.Calendly.initPopupWidget) window.Calendly.initPopupWidget({ url: CALENDLY_URL });
       else window.open(CALENDLY_URL, "_blank", "noopener");
     });
+  });
+
+  // ---- Track direct-contact clicks (Call / WhatsApp / Email) ----
+  document.querySelectorAll('a[href^="tel:"]').forEach(function (el) {
+    el.addEventListener("click", function () { track("call_click", { location: evLoc(el) }); });
+  });
+  document.querySelectorAll('a[href*="wa.me"]').forEach(function (el) {
+    el.addEventListener("click", function () { track("whatsapp_click", { location: evLoc(el) }); });
+  });
+  document.querySelectorAll('a[href^="mailto:"]').forEach(function (el) {
+    el.addEventListener("click", function () { track("email_click", { location: evLoc(el) }); });
   });
 
   // ---- Mobile menu ----
@@ -146,6 +172,7 @@
         headers: { "Accept": "application/json" }
       }).then(function (res) {
         if (res.ok) {
+          track("contact_submit");
           form.setAttribute("hidden", "");
           document.getElementById("formSuccess").removeAttribute("hidden");
         } else {
