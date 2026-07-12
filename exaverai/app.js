@@ -155,7 +155,7 @@
   document.querySelectorAll(".drop-rev").forEach(function (el) { dropIO.observe(el); });
 
   // ---- Contact form (submits to Formspree in the background, keeps the success UI) ----
-  var FORMSPREE_ENDPOINT = "https://formspree.io/f/xzdnpalr";
+  var FORMSPREE_ENDPOINT = "https://formspree.io/f/mlgqrajn";
   var form = document.getElementById("contactForm");
   if (form) {
     form.addEventListener("submit", function (e) {
