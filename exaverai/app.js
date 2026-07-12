@@ -61,6 +61,43 @@
     }, { passive: true });
   })();
 
+  // ---- Nav CTA becomes the primary once the hero CTA scrolls out of view ----
+  var heroCta = document.querySelector(".hero-side .stamp");
+  var navCta = document.getElementById("navCta");
+  if (heroCta && navCta) {
+    var navTick = false;
+    var updateNav = function () {
+      navTick = false;
+      navCta.classList.toggle("cta-solid", heroCta.getBoundingClientRect().bottom < 8);
+    };
+    window.addEventListener("scroll", function () {
+      if (!navTick) { navTick = true; requestAnimationFrame(updateNav); }
+    }, { passive: true });
+    updateNav();
+  }
+
+  // ---- Pipeline lights (re)start from the first step when it scrolls into view ----
+  var pipeline = document.querySelector(".pipeline");
+  if (pipeline) {
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) {
+          pipeline.classList.remove("run");
+          void pipeline.offsetWidth; // force reflow so the animation restarts from Ingest
+          pipeline.classList.add("run");
+        } else {
+          pipeline.classList.remove("run");
+        }
+      });
+    }, { threshold: 0.35 }).observe(pipeline);
+  }
+
+  // ---- Enterprise panels: drop in on scroll down, lift back up on scroll up ----
+  var dropIO = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) { en.target.classList.toggle("shown", en.isIntersecting); });
+  }, { threshold: 0.2 });
+  document.querySelectorAll(".drop-rev").forEach(function (el) { dropIO.observe(el); });
+
   // ---- Contact form ----
   var form = document.getElementById("contactForm");
   if (form) {
