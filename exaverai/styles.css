@@ -202,7 +202,7 @@ a{color:inherit;text-decoration:none}
 .statement{font-family:var(--serif);font-size:clamp(1.7rem,4.4vw,3.4rem);line-height:1.18;font-weight:400;
   max-width:26ch;margin:0 auto;letter-spacing:-.015em;text-align:left}
 .statement-by{font-family:var(--mono);font-size:.9rem;color:var(--oxblood);margin:clamp(20px,3vw,28px) 0 clamp(40px,5vw,60px);letter-spacing:.02em}
-.tw-cursor{display:inline-block;width:.42em;height:.82em;background:var(--vermilion);margin-left:6px;
+.tw-cursor{display:inline-block;width:.21em;height:.82em;background:var(--vermilion);margin-left:5px;
   vertical-align:baseline;animation:tw-blink 1.05s step-end infinite}
 @keyframes tw-blink{50%{opacity:0}}
 .crew{display:grid;grid-template-columns:repeat(3,1fr);border:2px solid var(--ink);border-right:0}
