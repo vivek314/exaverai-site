@@ -14,13 +14,13 @@
 <meta property="og:title" content="Exaver AI · AI Automation Studio" />
 <meta property="og:description" content="Enterprise-grade AI systems that clear the busywork. Built on your infrastructure, with zero data retention. Yours to keep." />
 <meta property="og:url" content="https://exaverai.com/" />
-<meta property="og:image" content="https://exaverai.com/og-image.png" />
+<meta property="og:image" content="https://exaverai.com/og-image.png?v=2" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Exaver AI · AI Automation Studio" />
 <meta name="twitter:description" content="Enterprise-grade AI systems that clear the busywork. Built once, yours to keep." />
-<meta name="twitter:image" content="https://exaverai.com/og-image.png" />
+<meta name="twitter:image" content="https://exaverai.com/og-image.png?v=2" />
 
 <link rel="icon" href="/favicon.ico?v=5" sizes="any" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=5" />
@@ -32,17 +32,43 @@
 {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
+  "@id": "https://exaverai.com/#organization",
   "name": "Exaver AI",
+  "alternateName": "Exaver",
   "url": "https://exaverai.com/",
-  "description": "AI automation studio building enterprise-grade AI systems: autonomous agents, workflow automation, AI voice agents, and document pipelines, with zero data retention.",
   "email": "contact@exaverai.com",
+  "slogan": "Kill the busywork.",
+  "description": "Exaver AI is an AI automation studio that builds custom, enterprise-grade AI systems for businesses: AI enablement and consulting, workflow automation, document AI and OCR, AI voice agents, and AI content and advertising. Systems are built on the client's own infrastructure (AWS Bedrock, Azure, Google Vertex AI) with zero data retention, then handed over for the client to own.",
+  "foundingDate": "2026",
   "founder": [
-    { "@type": "Person", "name": "Amarsh" },
-    { "@type": "Person", "name": "Ajju" },
-    { "@type": "Person", "name": "Vivek" }
+    { "@type": "Person", "name": "Amarsh", "jobTitle": "Founder" },
+    { "@type": "Person", "name": "Ajju", "jobTitle": "Founder" },
+    { "@type": "Person", "name": "Vivek", "jobTitle": "Founder" }
   ],
-  "serviceType": ["AI Automation", "Autonomous AI Agents", "Workflow Automation", "AI Voice Agents", "Document AI", "OCR"],
-  "areaServed": "Worldwide"
+  "areaServed": "Worldwide",
+  "knowsAbout": [
+    "AI automation", "AI agents", "workflow automation", "document AI", "OCR",
+    "AI voice agents", "AI content generation", "AI advertising", "AI enablement",
+    "AI consulting", "AWS Bedrock", "Azure OpenAI", "Google Vertex AI", "zero data retention",
+    "HIPAA", "SOC 2"
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "email": "contact@exaverai.com",
+    "contactType": "sales",
+    "availableLanguage": "English"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "AI automation services",
+    "itemListElement": [
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI Enablement & Consulting", "description": "We work with your team to find where AI fits, map the workflows worth automating, and build what makes sense." } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Workflow Automation", "description": "Whole processes and autonomous agents that run and act on a schedule or trigger, around the clock." } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Document AI & OCR", "description": "Turn stacks of documents into structured data, live dashboards, and answers, with automatic QA and flagging." } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI Voice Agents", "description": "Inbound and outbound voice agents that answer, qualify, remind, and follow up in real time." } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI Content & Ads", "description": "AI-generated content, video, and email, plus AI-run Meta and Google ad campaigns." } }
+    ]
+  }
 }
 </script>
 
@@ -232,15 +258,15 @@
   <p class="statement-by">Amarsh · Ajju · Vivek · Founders · IIT engineers</p>
   <div class="crew">
     <figure class="crew-member reveal">
-      <div class="duo"><img src="founder-amarsh.png" alt="Amarsh, co-founder of Exaver AI" loading="lazy" /></div>
+      <div class="duo"><img src="founder-amarsh.jpg" alt="Amarsh, co-founder of Exaver AI" width="512" height="512" loading="lazy" /></div>
       <figcaption><span class="cm-name">Amarsh</span><span class="cm-role">Founder</span></figcaption>
     </figure>
     <figure class="crew-member reveal">
-      <div class="duo"><img src="founder-ajju.png" alt="Ajju, co-founder of Exaver AI" loading="lazy" /></div>
+      <div class="duo"><img src="founder-ajju.jpg" alt="Ajju, co-founder of Exaver AI" width="512" height="512" loading="lazy" /></div>
       <figcaption><span class="cm-name">Ajju</span><span class="cm-role">Founder</span></figcaption>
     </figure>
     <figure class="crew-member reveal">
-      <div class="duo"><img src="founder-vivek.png?v=2" alt="Vivek, co-founder of Exaver AI" loading="lazy" /></div>
+      <div class="duo"><img src="founder-vivek.jpg" alt="Vivek, co-founder of Exaver AI" width="512" height="512" loading="lazy" /></div>
       <figcaption><span class="cm-name">Vivek</span><span class="cm-role">Founder</span></figcaption>
     </figure>
   </div>
@@ -307,5 +333,7 @@
 </footer>
 
 <script src="app.js?v=13" defer></script>
+<!-- Vercel Web Analytics (privacy-friendly, no cookies) -->
+<script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>

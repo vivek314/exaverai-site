@@ -1,0 +1,41 @@
+# Exaver AI
+
+> Exaver AI is an AI automation studio. We build custom, enterprise-grade AI systems that clear the busywork: we find the work quietly draining a team's hours, build an AI system that handles it on the client's own infrastructure with zero data retention, and hand it over for the client to own. Built once, yours to keep. No retainers, no lock-in.
+
+Contact: contact@exaverai.com
+Website: https://exaverai.com
+Founded: 2026, India. Founders: Amarsh, Ajju, Vivek (engineers).
+Serves clients worldwide.
+
+## What we build
+
+- **AI Enablement & Consulting**: We sit with a team, map the workflows worth automating, and build what makes sense. If AI can run it better, we find it and ship it.
+- **Workflow Automation**: Whole processes that run themselves, plus autonomous agents that decide and act (not just follow steps) — reports, invoices, onboarding, follow-ups, on a schedule or trigger, around the clock.
+- **Document AI & OCR**: Turn stacks of documents (including handwritten) into structured data, live dashboards, trends and forecasts, with automatic QA that flags only what needs a human.
+- **AI Voice Agents**: Inbound and outbound voice agents that answer, qualify, remind, and follow up in real time.
+- **AI Content & Ads**: AI-generated content, video, and email, plus AI-run Meta and Google ad campaigns.
+
+## How we work
+
+1. Scope call — understand where the team is losing hours and agree scope and timeline before any build.
+2. Build & test — build on the tools the client already runs and prove it works on real workflows, not a demo.
+3. Handover — the client owns everything (code, prompts, workflows); we stay on until it runs clean, then step back.
+
+## Data, security, and infrastructure
+
+- Zero data retention: we run only enterprise-grade LLMs; client data is never stored, logged, or used to train a model.
+- Built on the client's own infrastructure: AWS Bedrock, Microsoft Azure, and Google Vertex AI, so data stays in the client's environment.
+- Compliance: workflows aligned to HIPAA and SOC 2 controls; NDAs signed when a project calls for one.
+- Production-grade engineering: tested and monitored, built to run in production.
+
+## In production
+
+A document-AI system running for two teams reads documents on arrival, extracts and QA-checks the data, surfaces dashboards/trends/forecasts, and flags discrepancies — turning multi-day review into seconds.
+
+## Tools we build on
+
+OpenAI, Anthropic, AWS Bedrock, Azure, Google Vertex AI, n8n, Make, Zapier, Slack, Notion, HubSpot, Twilio.
+
+## Contact
+
+To start, email contact@exaverai.com or book a call via the site. Send the workflow eating your team's time and we will say, straight, whether we can automate it and how fast.
