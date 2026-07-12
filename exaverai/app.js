@@ -52,4 +52,37 @@
       document.getElementById("formSuccess").removeAttribute("hidden");
     });
   }
+
+  // ---- Typewriter for the founder statement ----
+  var stmt = document.querySelector(".statement");
+  if (stmt) {
+    var full = stmt.textContent.replace(/\s+/g, " ").trim();
+    var typed = false;
+    var twIO = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting || typed) return;
+        typed = true;
+        twIO.unobserve(stmt);
+        stmt.style.minHeight = stmt.offsetHeight + "px"; // reserve space so nothing jumps
+        var textEl = document.createElement("span");
+        var cursor = document.createElement("span");
+        cursor.className = "tw-cursor";
+        stmt.textContent = "";
+        stmt.appendChild(textEl);
+        stmt.appendChild(cursor);
+        var i = 0;
+        var step = function () {
+          if (i <= full.length) {
+            textEl.textContent = full.slice(0, i);
+            i++;
+            setTimeout(step, 42);
+          } else {
+            setTimeout(function () { cursor.style.display = "none"; }, 1400);
+          }
+        };
+        step();
+      });
+    }, { threshold: 0.45 });
+    twIO.observe(stmt);
+  }
 })();
