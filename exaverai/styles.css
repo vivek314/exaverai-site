@@ -325,6 +325,16 @@ a{color:inherit;text-decoration:none}
   .hero-side .stamp{margin-top:6px}
   /* IIT engineers: its own line, bolder + bigger on phones */
   .statement-by .cred{font-size:1.15rem;font-weight:700;color:var(--vermilion);margin-top:9px}
+  /* condense vertical rhythm on phones (keeps breathing room, just tighter) */
+  :root{--gap:34px}
+  .block-head{margin-bottom:22px}
+  .row{padding:15px 0}
+  .steps{gap:12px}
+  .step{padding:20px}
+  .guard{padding:15px 0}
+  .prod-grid{margin-bottom:22px}
+  .quote{padding:18px 0}
+  .quote + .quote{padding-top:18px}
 }
 @media (max-width:520px){
   .hb{display:inline}
