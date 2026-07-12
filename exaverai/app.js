@@ -32,6 +32,35 @@
   }, { threshold: 0.12, rootMargin: "-24px" });
   document.querySelectorAll(".reveal").forEach(function (el) { io.observe(el); });
 
+  // ---- Keep the service-row highlight in sync with the cursor while scrolling ----
+  // Browsers don't re-fire :hover during a scroll (cursor is still, page moves), so the
+  // row under the pointer wouldn't light up on fast scroll. We track the pointer and, on
+  // scroll, resolve the row actually under it. Mouse movement falls back to native :hover.
+  (function () {
+    var index = document.querySelector(".index");
+    if (!index) return;
+    var px = -1, py = -1, current = null, ticking = false;
+    var set = function (row) {
+      if (current === row) return;
+      if (current) current.classList.remove("cursor-hover");
+      current = row;
+      if (current) current.classList.add("cursor-hover");
+    };
+    window.addEventListener("pointermove", function (e) {
+      px = e.clientX; py = e.clientY;
+      set(null); // let native :hover take over while the mouse is moving
+    }, { passive: true });
+    window.addEventListener("scroll", function () {
+      if (ticking || px < 0) return;
+      ticking = true;
+      requestAnimationFrame(function () {
+        ticking = false;
+        var el = document.elementFromPoint(px, py);
+        set(el && el.closest ? el.closest(".index .row") : null);
+      });
+    }, { passive: true });
+  })();
+
   // ---- Contact form ----
   var form = document.getElementById("contactForm");
   if (form) {
@@ -76,9 +105,8 @@
             textEl.textContent = full.slice(0, i);
             i++;
             setTimeout(step, 42);
-          } else {
-            setTimeout(function () { cursor.style.display = "none"; }, 1400);
           }
+          // cursor stays blinking after typing completes
         };
         step();
       });
