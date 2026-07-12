@@ -50,6 +50,8 @@ a{color:inherit;text-decoration:none}
 .stamp:active{transform:translate(5px,5px);box-shadow:0 0 0 var(--ink)}
 .stamp-sm{padding:9px 15px;font-size:.74rem;box-shadow:4px 4px 0 var(--ink)}
 .stamp-block{width:100%;text-align:center;padding:17px;cursor:pointer;font-size:.9rem}
+.stamp-line{background:transparent;color:var(--ink);box-shadow:none}
+.stamp-line:hover{background:var(--vermilion);color:var(--bone)}
 
 /* ---------- masthead bar ---------- */
 .bar{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;
@@ -122,11 +124,12 @@ a{color:inherit;text-decoration:none}
 .index{list-style:none;margin:0;padding:0;border-top:2px solid var(--ink)}
 .row{position:relative;display:grid;grid-template-columns:auto minmax(0,7fr) minmax(0,9fr);
   gap:clamp(14px,3vw,44px);align-items:baseline;padding:clamp(20px,3vw,34px) 0;
-  border-bottom:2px solid var(--ink);transition:background .3s ease,color .3s ease,padding-left .3s ease}
+  border-bottom:2px solid var(--ink);transition:background .35s ease,color .35s ease,padding-left .18s ease}
 .row-no{font-family:var(--mono);font-size:.9rem;color:var(--oxblood);padding-top:8px}
 .row-name{font-family:var(--disp);font-weight:400;font-size:clamp(1.5rem,3.4vw,2.6rem);line-height:.94;margin:0;letter-spacing:-.01em}
 .row-desc{font-size:1.08rem;color:var(--ink-2);max-width:46ch;align-self:center}
-.row:hover,.row.active{background:var(--vermilion);color:var(--bone);padding-left:clamp(10px,2vw,24px)}
+.row:hover,.row.active{background:var(--vermilion);color:var(--bone);padding-left:clamp(10px,2vw,24px);
+  transition:none}
 .row:hover .row-no,.row.active .row-no{color:var(--bone)}
 .row:hover .row-desc,.row.active .row-desc{color:var(--bone)}
 .hb{display:none}
