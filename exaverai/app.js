@@ -16,15 +16,9 @@
     return "other";
   };
 
-  // ---- Calendly ----
-  var CALENDLY_URL = "https://calendly.com/contact-exaverai/30min";
-  document.querySelectorAll("[data-calendly]").forEach(function (el) {
-    el.addEventListener("click", function (e) {
-      e.preventDefault();
-      track("book_call", { location: evLoc(el) });
-      if (window.Calendly && window.Calendly.initPopupWidget) window.Calendly.initPopupWidget({ url: CALENDLY_URL });
-      else window.open(CALENDLY_URL, "_blank", "noopener");
-    });
+  // ---- Book a call: opens the Zoho Bookings page (via the link's href) + tracks ----
+  document.querySelectorAll("[data-book]").forEach(function (el) {
+    el.addEventListener("click", function () { track("book_call", { location: evLoc(el) }); });
   });
 
   // ---- Track direct-contact clicks (Call / WhatsApp / Email) ----
